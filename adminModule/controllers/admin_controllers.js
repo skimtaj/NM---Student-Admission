@@ -358,7 +358,7 @@ const forgetPassword = async (req, res) => {
             to: adminEmail.email,
             subject: 'Forget Password - Nababia Mission',
             text: `To reset your password, please click on the link below:
-http://localhost:3000/nm/admin/resetPassword/${adminEmail._id}`
+https://nm-g16x.onrender.com/nm/admin/resetPassword/${adminEmail._id}`
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

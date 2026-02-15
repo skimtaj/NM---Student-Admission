@@ -11,8 +11,8 @@ route.get('/nm/admin-login', adminLogin);
 route.post('/nm/admin-login', adminLoginPost);
 
 
-route.get('/nm/admin-signup', adminSignup);
-route.post('/nm/admin-signup', adminSignupPost);
+route.get('/nm/admin-signup/si', adminSignup);
+route.post('/nm/admin-signup/si', adminSignupPost);
 
 route.get('/nm/admin-dashboard', auth, adminDashboard);
 
