@@ -166,45 +166,6 @@
             margin-bottom: 15px;
         }
 
-        .payment-details {
-            background-color: #f9f9f9;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .qr-code img {
-            border: 3px solid var(--primary-color);
-            border-radius: 16px;
-            padding: 6px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 260px;
-            height: auto;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            box-shadow: 0 10px 25px rgba(70, 12, 76, 0.2);
-        }
-
-        .qr-code img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(70, 12, 76, 0.35);
-        }
-
-        .payment-screenshot-upload {
-            margin-top: 25px;
-        }
-
-        .bank-detail-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-        }
-
         .important-notice {
             background-color: #fff3cd;
             border: 1px solid #ffc107;
@@ -247,16 +208,6 @@
 
         .modal-header .btn-close {
             filter: brightness(0) invert(1);
-        }
-
-        .qr-modal .modal-body img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 20px;
-            border: 4px solid var(--primary-color);
-            padding: 8px;
-            background: white;
         }
 
         .subject-marks-row {
@@ -449,7 +400,7 @@
                             <h6><i class="fas fa-exclamation-triangle me-2"></i>Important Notice</h6>
                             <ul class="mb-0 ps-3">
                                 <li>Fill the form in English </li>
-                                <li>Registration fee only ₹250</li>
+                                <li>Registration Fee: ₹250 only (Payable at the time of document submission)</li>
                                 <li>For Class XI, secondary result & division selection mandatory</li>
                                 <li><strong class="text-danger">All photos/signatures must be 10KB - 200KB</strong></li>
                                 <li><strong>All fields are required except Mobile 2</strong></li>
@@ -774,46 +725,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-section" id="section-7">
-                                <h5 class="mb-3 text-success">7. Payment Information</h5>
-                                <div class="payment-details">
-                                    <h6 class="text-success mb-3">PhonePe Payment (₹250)</h6>
-                                    <div class="row align-items-center">
-                                        <div class="col-md-6 text-center">
-                                            <div class="qr-code">
-                                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqefYdvv3ZepXiL2kiRXievv_t-nTMnlH8U6S-zi4HyLIFOLExNmogNPJ0rhoNzmYOk40WWdYnC8e41iQVmP4vTwUBapNPe3YSFAAC7dRkPAH2xFoae6S9TToP0wP25HNnCtGDNtCqbau1CGBYy0ftUa7zD-DSfIEmQFL7IXVun6ShNMbC2vdSZq5Zjn3m/w380-h640/WhatsApp%20Image%202026-02-12%20at%2011.17.43%20AM.jpeg"
-                                                    alt="QR Code" id="qrCodeImage" class="clickable-qr">
-                                            </div>
-                                            <p class="small text-muted mt-2">Click QR to enlarge</p>
-                                        </div>
-                                        <div class="col-md-6 mt-3 mt-md-0">
-                                            <div class="bank-detail-item"><strong>Account Name:</strong>
-                                                <p class="mb-0">Nababia Mission</p>
-                                            </div>
-                                            <div class="bank-detail-item"><strong>Amount:</strong>
-                                                <p class="mb-0">₹250 (fixed)</p>
-                                            </div>
-                                            <div class="mt-3 p-3 bg-light rounded small">
-                                                <strong>Instructions:</strong>
-                                                <ul class="mb-0 ps-3">
-                                                    <li>Scan QR and pay ₹250</li>
-                                                    <li>Upload screenshot (10KB - 200KB)</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="payment-screenshot-upload mt-4">
-                                        <h6 class="text-success mb-2">Payment Screenshot <span
-                                                class="text-danger">*</span></h6>
-                                        <input type="file" class="form-control file-size-limit" accept="image/*"
-                                            name="paymentScreenshot" required data-max-kb="200" data-min-kb="10">
-                                        <div class="form-text">JPG/PNG, 10KB-200KB, ₹250 must be visible</div>
-                                        <div class="file-size-warning" id="warn_paymentScreenshot"></div>
-                                        <div class="required-error" data-for="paymentScreenshot">This file is required
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="d-flex justify-content-center mt-4 mb-5">
                                 <button type="submit" id="finalSubmitBtn" class="btn btn-custom px-5 py-2">Submit
@@ -822,6 +733,7 @@
                         </form>
                     </div>
 
+                    <!-- instruction modal remains (no payment/qr references inside it) -->
                     <div class="modal fade" id="instructionModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
@@ -864,23 +776,6 @@
                         </div>
                     </div>
 
-                    <div class="modal fade qr-modal" id="qrModal" tabindex="-1">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background:#460C4C;color:white;">
-                                    <h5 class="modal-title"><i class="fas fa-qrcode me-2"></i>QR Code</h5>
-                                    <button type="button" class="btn-close btn-close-white"
-                                        data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqefYdvv3ZepXiL2kiRXievv_t-nTMnlH8U6S-zi4HyLIFOLExNmogNPJ0rhoNzmYOk40WWdYnC8e41iQVmP4vTwUBapNPe3YSFAAC7dRkPAH2xFoae6S9TToP0wP25HNnCtGDNtCqbau1CGBYy0ftUa7zD-DSfIEmQFL7IXVun6ShNMbC2vdSZq5Zjn3m/w380-h640/WhatsApp%20Image%202026-02-12%20at%2011.17.43%20AM.jpeg"
-                                        alt="QR"
-                                        style="max-width:100%;border:4px solid #460C4C;border-radius:20px;padding:8px;">
-                                    <p class="mt-3 fw-bold">Pay ₹250</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                     <script>
@@ -1009,13 +904,11 @@
                             });
 
                             const instructionModal = new bootstrap.Modal(document.getElementById('instructionModal'));
-                            const qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+
 
                             setTimeout(() => { instructionModal.show(); }, 400);
                             document.getElementById('helpButton').addEventListener('click', function () { instructionModal.show(); });
 
-                            const qrImg = document.querySelector('.clickable-qr');
-                            if (qrImg) qrImg.addEventListener('click', function () { qrModal.show(); });
 
                             const form = document.getElementById('registrationForm');
                             form.addEventListener('submit', function (e) {
@@ -1025,7 +918,7 @@
                                 }
                             });
 
-                            calculateResult(); 
+                            calculateResult();
                         });
                     </script>
 </body>

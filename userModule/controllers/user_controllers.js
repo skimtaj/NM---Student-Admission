@@ -111,7 +111,7 @@ const downloadApplication = async (req, res) => {
 
         const admissionSourse = await admission_model.findById(req.params.id);
 
-        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/ilovepdf_merged (1) (7) (2).pdf');
+        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/ilovepdf_merged (1) (7) (2) (1).pdf');
         const existingPdfBytes = await fs.readFile(inputPdfPath);
         const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
@@ -131,9 +131,6 @@ const downloadApplication = async (req, res) => {
         form.getTextField('family_monthly_income').setText(admissionSourse.family_monthly_income?.toString());
         form.getTextField('total_earner').setText(admissionSourse.total_earner?.toString());
         form.getTextField('student_name_capital').setText(admissionSourse.student_name_capital);
-
-        form.getTextField('payment_mode').setText(admissionSourse.payment_mode);
-
 
 
         form.getTextField('village').setText(admissionSourse.village);
@@ -290,7 +287,7 @@ const downloadApplication = async (req, res) => {
     }
     catch (err) {
 
-        console.log('Admit pdf genering error'); 
+        console.log('Admit pdf genering error', err); 
       
     }
 

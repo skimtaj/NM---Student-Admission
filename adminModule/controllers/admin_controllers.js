@@ -128,7 +128,7 @@ const downloadPDF = async (req, res) => {
 
         console.log(admissionSourse)
 
-        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/ilovepdf_merged (1) (7) (2).pdf');
+        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/ilovepdf_merged (1) (7) (2) (1).pdf');
         const existingPdfBytes = await fs.readFile(inputPdfPath);
         const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
@@ -137,7 +137,6 @@ const downloadPDF = async (req, res) => {
         form.getTextField('exam_center').setText(admissionSourse.exam_center);
         form.getTextField('admission_date').setText(admissionSourse.admission_date);
         form.getTextField('serial_no').setText(admissionSourse.serial_no);
-        form.getTextField('payment_mode').setText(admissionSourse.payment_mode);
         form.getTextField('student_name_eng').setText(admissionSourse.student_name_eng);
         form.getTextField('dob').setText(admissionSourse.dob);
 
@@ -302,9 +301,9 @@ const downloadPDF = async (req, res) => {
 
     }
 
-    catch {
+    catch (err) {
 
-        console.log('admid card pdf generation error')
+        console.log('admid card pdf generation error', err)
     }
 }
 
