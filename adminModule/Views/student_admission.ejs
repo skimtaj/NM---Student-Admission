@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('admin_sidebar')%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Student Admission | DNS Madrasah</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <style>
+            :root {
+                --pos-primary: #54A651;
+                --pos-dark: #2c3e50;
+                --pos-light: #f8f9fa;
+            }
+
+            body {
+                background-color: var(--pos-light);
+                font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+                color: var(--pos-dark);
+                margin: 0;
+                padding: 0;
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                margin-left: 280px;
+                padding: 15px;
+                margin-top: 80px;
+                margin-bottom: 30px;
+            }
+
+            .pos-card {
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                padding: 20px 30px;
+                width: 100%;
+                max-width: 1075px;
+                margin: 0 auto;
+            }
+
+            h5 {
+                color: white;
+                background: rgb(12, 138, 65);
+                padding: 12px 18px;
+                border-radius: 10px;
+                width: 100%;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                font-size: 1.1rem;
+            }
+
+            .pos-btn-primary {
+                background-color: rgb(12, 138, 65);
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                color: white;
+                font-weight: 500;
+                transition: all 0.2s;
+                font-size: 0.9rem;
+            }
+
+            .pos-btn-primary:hover {
+                background-color: white;
+                color: var(--pos-primary);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 105, 92, 0.25);
+            }
+
+            .btn-outline-secondary {
+                border-color: #6c757d;
+                color: #6c757d;
+            }
+
+            .btn-outline-secondary:hover {
+                background-color: #6c757d;
+                color: white;
+            }
+
+            .form-section {
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .form-section h6 {
+                color: var(--pos-primary);
+                border-bottom: 1px solid #eee;
+                padding-bottom: 8px;
+                margin-bottom: 15px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+            }
+
+            .form-section h6 i {
+                margin-right: 8px;
+            }
+
+            .form-label {
+                font-weight: 600;
+                color: #555;
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+            }
+
+            .form-control,
+            .form-select {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+                border-radius: 4px;
+                border: 1px solid #ced4da;
+            }
+
+            .form-control:focus,
+            .form-select:focus {
+                border-color: var(--pos-primary);
+                box-shadow: 0 0 0 0.2rem rgba(84, 166, 81, 0.25);
+            }
+
+            .required-field::after {
+                content: " *";
+                color: #dc3545;
+            }
+
+            .photo-upload-area {
+                border: 2px dashed #dee2e6;
+                border-radius: 8px;
+                padding: 20px;
+                text-align: center;
+                background-color: #f8f9fa;
+                cursor: pointer;
+                transition: all 0.3s;
+                height: 100%;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .photo-upload-area:hover {
+                border-color: var(--pos-primary);
+                background-color: #f0f9f0;
+            }
+
+            .photo-preview {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 4px solid var(--pos-primary);
+                margin-bottom: 15px;
+                display: none;
+            }
+
+            .signature-preview {
+                width: 200px;
+                height: 80px;
+                object-fit: contain;
+                border: 1px solid #dee2e6;
+                margin-bottom: 10px;
+                display: none;
+            }
+
+            .file-upload-label {
+                cursor: pointer;
+                display: block;
+            }
+
+            .file-upload-input {
+                display: none;
+            }
+
+            .upload-placeholder i {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+
+            .file-name {
+                font-size: 0.8rem;
+                color: #6c757d;
+                margin-top: 5px;
+                min-height: 18px;
+            }
+
+            .file-name.has-file {
+                color: #28a745;
+                font-weight: 500;
+            }
+
+            .form-note {
+                font-size: 0.8rem;
+                color: #6c757d;
+                font-style: italic;
+                margin-top: 5px;
+            }
+
+            .subject-score-input {
+                max-width: 100px;
+            }
+
+            .result-row {
+                margin-bottom: 8px;
+                align-items: center;
+            }
+
+            .result-label {
+                font-size: 0.85rem;
+                font-weight: 500;
+                color: #495057;
+            }
+
+            .result-total {
+                background-color: #f8f9fa;
+                padding: 10px;
+                border-radius: 6px;
+                border: 1px solid #dee2e6;
+            }
+
+            /* Card styles for row-based layout */
+            .subject-card {
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                height: 100%;
+            }
+
+            .subject-card:hover {
+                border-color: var(--pos-primary);
+                box-shadow: 0 2px 8px rgba(84, 166, 81, 0.1);
+            }
+
+            .subject-card .card-body {
+                padding: 1rem;
+            }
+
+            .result-total-card {
+                background-color: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+            }
+
+            .result-total-card .card-body {
+                padding: 1.25rem;
+            }
+
+            .form-control-lg {
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem;
+                background-color: #f8f9fa;
+            }
+
+            @media (max-width: 768px) {
+                .main-content {
+                    margin-left: 0;
+                    padding: 10px;
+                }
+
+                .pos-card {
+                    padding: 15px;
+                    margin-left: 0;
+                }
+
+                .pos-card h5 {
+                    font-size: 1rem;
+                }
+
+                .pos-card h6 {
+                    font-size: 0.75rem;
+                }
+
+                .form-label {
+                    font-size: 0.85rem;
+                }
+
+                .form-control,
+                .form-select {
+                    font-size: 0.85rem;
+                }
+
+                .pos-btn-primary,
+                .btn {
+                    font-size: 0.85rem;
+                    padding: 6px 12px;
+                }
+
+                .photo-upload-area {
+                    min-height: 180px;
+                }
+
+                .photo-preview {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                .subject-card .card-body {
+                    padding: 0.75rem;
+                }
+
+                .form-control-lg {
+                    font-size: 0.9rem;
+                    padding: 0.4rem 0.6rem;
+                }
+
+                .result-total-card .card-body {
+                    padding: 1rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .pos-card {
+                    padding: 15px;
+                    width: 100%;
+                    margin: auto;
+                    margin-bottom: 30px;
+                }
+
+                .photo-upload-area {
+                    padding: 15px;
+                }
+
+                .photo-preview {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .subject-card {
+                    margin-bottom: 10px;
+                }
+
+                .form-control {
+                    font-size: 0.85rem;
+                    padding: 0.35rem 0.5rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <% if ( messages.success) { %>
+            <script>
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "<%= messages.success %>",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: "#ffffff",
+                    iconColor: "#00b894",
+                    color: "#333",
+                    customClass: {
+                        popup: 'custom-swal-toast'
+                    },
+                    didOpen: (toast) => {
+                        toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                        toast.style.borderRadius = '8px';
+                        toast.style.padding = '0.75rem 1.25rem';
+                    }
+                });
+            </script>
+            <% } %>
+
+                <% if ( messages.error) { %>
+                    <script>
+                        Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "error",
+                            title: "<%= messages.error %>",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            background: "#ffffff",
+                            iconColor: "red",
+                            color: "#333",
+                            customClass: {
+                                popup: 'custom-swal-toast'
+                            },
+                            didOpen: (toast) => {
+                                toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                                toast.style.borderRadius = '8px';
+                                toast.style.padding = '0.75rem 1.25rem';
+                            }
+                        });
+                    </script>
+                    <% } %>
+
+                        <div class="main-content">
+                            <div class="pos-card">
+                                <h5 class="mb-4 fw-bold">
+                                    <i class="fas fa-user-plus me-2"></i> New Student Admission
+                                </h5>
+
+                                <form action="/dnsmadrasah.org/dns-admin/student-registration" method="post"
+                                    enctype="multipart/form-data" id="admissionForm">
+                                    <!-- Section 1: Basic Information -->
+                                    <div class="form-section">
+                                        <h6><i class="fas fa-user me-2"></i> Student Basic Information</h6>
+
+                                        <div class="row mb-4">
+                                            <div class="col-md-4">
+                                                <div class="photo-upload-area" id="studentPhotoArea">
+                                                    <img id="studentPhotoPreview" class="photo-preview"
+                                                        alt="Student Photo Preview">
+                                                    <div id="studentUploadPlaceholder" class="upload-placeholder">
+                                                        <i class="fas fa-camera fa-2x text-muted mb-2"></i>
+                                                        <p class="mb-1">Student Photo</p>
+                                                        <small class="text-muted">JPG, PNG (Max 2MB)</small>
+                                                    </div>
+                                                    <input type="file" id="student_photo" name="student_photo"
+                                                        class="file-upload-input" accept="image/*">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label for="student_name"
+                                                                class="form-label required-field">Student Name</label>
+                                                            <input type="text" class="form-control" id="student_name"
+                                                                name="student_name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="dob" class="form-label required-field">Date of
+                                                                Birth</label>
+                                                            <input type="date" class="form-control" id="dob" name="dob"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="current_class"
+                                                                class="form-label required-field">Current Class</label>
+                                                            <input type="text" class="form-control" id="current_class"
+                                                                name="current_class" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label for="running_institute" class="form-label">Running
+                                                                Institute Name</label>
+                                                            <input type="text" class="form-control"
+                                                                id="running_institute" name="running_institute">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 2: Guardian Information -->
+                                    <div class="form-section">
+                                        <h6><i class="fas fa-users me-2"></i> Guardian Information</h6>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="guardian_name"
+                                                        class="form-label required-field">Guardian Name</label>
+                                                    <input type="text" class="form-control" id="guardian_name"
+                                                        name="guardian_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="relation_with_student"
+                                                        class="form-label required-field">Relation with Student</label>
+                                                    <select class="form-select" id="relation_with_student"
+                                                        name="relation_with_student" required>
+                                                        <option value="">Select Relation</option>
+                                                        <option value="Father">Father</option>
+                                                        <option value="Mother">Mother</option>
+                                                        <option value="Guardian">Guardian</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="guardian_occupation"
+                                                        class="form-label required-field">Guardian Occupation</label>
+                                                    <select class="form-select" id="guardian_occupation"
+                                                        name="guardian_occupation" required>
+                                                        <option value="">Select Occupation</option>
+                                                        <option value="Farmer">Farmer</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Service">Service</option>
+                                                        <option value="Teacher">Teacher</option>
+                                                        <option value="Doctor">Doctor</option>
+                                                        <option value="Engineer">Engineer</option>
+                                                        <option value="Driver">Driver</option>
+                                                        <option value="Day Labourer">Day Labourer</option>
+                                                        <option value="Housewife">Housewife</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="mother_name" class="form-label">Mother's Name</label>
+                                                    <input type="text" class="form-control" id="mother_name"
+                                                        name="mother_name">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="mother_occupation" class="form-label">Mother's
+                                                        Occupation</label>
+                                                    <select class="form-select" id="mother_occupation"
+                                                        name="mother_occupation">
+                                                        <option value="">Select Occupation</option>
+                                                        <option value="Housewife">Housewife</option>
+                                                        <option value="Teacher">Teacher</option>
+                                                        <option value="Service">Service</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="total_family_members" class="form-label">Total Family
+                                                        Members</label>
+                                                    <input type="number" class="form-control" id="total_family_members"
+                                                        name="total_family_members" min="1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="monthly_income" class="form-label">Monthly Income
+                                                        (₹)</label>
+                                                    <input type="number" class="form-control" id="monthly_income"
+                                                        name="monthly_income" min="0">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="photo-upload-area" id="guardianSignatureArea">
+                                                    <img id="guardianSignaturePreview" class="signature-preview"
+                                                        alt="Guardian Signature Preview">
+                                                    <div id="signatureUploadPlaceholder" class="upload-placeholder">
+                                                        <i class="fas fa-signature fa-2x text-muted mb-2"></i>
+                                                        <p class="mb-1">Guardian Signature</p>
+                                                        <small class="text-muted">JPG, PNG (Max 2MB)</small>
+                                                    </div>
+                                                    <input type="file" id="guardian_signature" name="guardian_signature"
+                                                        class="file-upload-input" accept="image/*">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 3: Address Information -->
+                                    <div class="form-section">
+                                        <h6><i class="fas fa-home me-2"></i> Address Information</h6>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="village"
+                                                        class="form-label required-field">Village</label>
+                                                    <input type="text" class="form-control" id="village" name="village"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="post_office" class="form-label required-field">Post
+                                                        Office</label>
+                                                    <input type="text" class="form-control" id="post_office"
+                                                        name="post_office" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="police_station" class="form-label required-field">Police
+                                                        Station</label>
+                                                    <input type="text" class="form-control" id="police_station"
+                                                        name="police_station" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="district"
+                                                        class="form-label required-field">District</label>
+                                                    <input type="text" class="form-control" id="district"
+                                                        name="district" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="pin_code" class="form-label required-field">PIN
+                                                        Code</label>
+                                                    <input type="text" class="form-control" id="pin_code"
+                                                        name="pin_code" pattern="[0-9]{6}" maxlength="6" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 4: Contact Information -->
+                                    <div class="form-section">
+                                        <h6><i class="fas fa-phone me-2"></i> Contact Information</h6>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="mobile_1" class="form-label required-field">Mobile
+                                                        Number 1</label>
+                                                    <input type="tel" class="form-control" id="mobile_1" name="mobile_1"
+                                                        pattern="[0-9]{10}" maxlength="10" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="mobile_2" class="form-label">Mobile Number 2
+                                                        (Optional)</label>
+                                                    <input type="tel" class="form-control" id="mobile_2" name="mobile_2"
+                                                        pattern="[0-9]{10}" maxlength="10">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 5: Madhyamik Result (Optional) - Row Based Layout -->
+                                    <div class="form-section">
+                                        <h6><i class="fas fa-graduation-cap me-2"></i> Madhyamik Examination Result (If
+                                            Applicable)</h6>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <p class="form-note mb-3">Fill only if student has appeared for
+                                                    Madhyamik examination</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 1: Bengali and English -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="bengali_score"
+                                                                    class="form-label mb-0">Bengali</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="bengali_score" name="bengali_score" min="0"
+                                                                    max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="english_score"
+                                                                    class="form-label mb-0">English</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="english_score" name="english_score" min="0"
+                                                                    max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 2: History and Geography -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="history_score"
+                                                                    class="form-label mb-0">History</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="history_score" name="history_score" min="0"
+                                                                    max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="geography_score"
+                                                                    class="form-label mb-0">Geography</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="geography_score" name="geography_score" min="0"
+                                                                    max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 3: Mathematics and Physical Science -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="mathematics_score"
+                                                                    class="form-label mb-0">Mathematics</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="mathematics_score" name="mathematics_score"
+                                                                    min="0" max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="physical_science_score"
+                                                                    class="form-label mb-0">Physical Science</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="physical_science_score"
+                                                                    name="physical_science_score" min="0" max="100"
+                                                                    step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 4: Life Science -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="subject-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-8">
+                                                                <label for="life_science_score"
+                                                                    class="form-label mb-0">Life Science</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" class="form-control"
+                                                                    id="life_science_score" name="life_science_score"
+                                                                    min="0" max="100" step="0.01" placeholder="Marks">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Total Marks and Percentage -->
+                                        <div class="row mt-4">
+                                            <div class="col-md-8">
+                                                <div class="result-total-card card">
+                                                    <div class="card-body">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="total_marks"
+                                                                        class="form-label fw-bold">Total Marks</label>
+                                                                    <input type="number"
+                                                                        class="form-control form-control-lg"
+                                                                        id="total_marks" name="total_marks" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="percentage"
+                                                                        class="form-label fw-bold">Percentage
+                                                                        (%)</label>
+                                                                    <input type="number"
+                                                                        class="form-control form-control-lg"
+                                                                        id="percentage" name="percentage" readonly
+                                                                        step="0.01">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Section -->
+                                    <div class="mt-4 pt-3 border-top">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <button type="submit" class="btn pos-btn-primary me-2">
+                                                    <i class="fas fa-check me-2"></i> Submit Admission
+                                                </button>
+                                            </div>
+                                            <a href="/dnsmadrasah.org/dns-admin/student-list"
+                                                class="btn btn-outline-secondary">
+                                                <i class="fa-solid fa-building-columns me-2"></i>
+                                                Back to List
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <script
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Photo upload functionality for student photo
+                                const studentPhotoArea = document.getElementById('studentPhotoArea');
+                                const studentPhotoInput = document.getElementById('student_photo');
+
+                                if (studentPhotoArea && studentPhotoInput) {
+                                    studentPhotoArea.addEventListener('click', function () {
+                                        studentPhotoInput.click();
+                                    });
+
+                                    studentPhotoInput.addEventListener('change', function (e) {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            // Check file size (max 2MB)
+                                            if (file.size > 2 * 1024 * 1024) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'File too large',
+                                                    text: 'Please select an image smaller than 2MB',
+                                                    toast: true,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    timer: 3000
+                                                });
+                                                return;
+                                            }
+
+                                            const reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                const preview = document.getElementById('studentPhotoPreview');
+                                                preview.src = e.target.result;
+                                                preview.style.display = 'block';
+                                                document.getElementById('studentUploadPlaceholder').style.display = 'none';
+                                            }
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                }
+
+                                // Photo upload functionality for guardian signature
+                                const guardianSignatureArea = document.getElementById('guardianSignatureArea');
+                                const guardianSignatureInput = document.getElementById('guardian_signature');
+
+                                if (guardianSignatureArea && guardianSignatureInput) {
+                                    guardianSignatureArea.addEventListener('click', function () {
+                                        guardianSignatureInput.click();
+                                    });
+
+                                    guardianSignatureInput.addEventListener('change', function (e) {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            // Check file size (max 2MB)
+                                            if (file.size > 2 * 1024 * 1024) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'File too large',
+                                                    text: 'Please select an image smaller than 2MB',
+                                                    toast: true,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    timer: 3000
+                                                });
+                                                return;
+                                            }
+
+                                            const reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                const preview = document.getElementById('guardianSignaturePreview');
+                                                preview.src = e.target.result;
+                                                preview.style.display = 'block';
+                                                document.getElementById('signatureUploadPlaceholder').style.display = 'none';
+                                            }
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                }
+
+                                // Calculate total marks and percentage for Madhyamik results
+                                const subjectInputs = [
+                                    'bengali_score',
+                                    'english_score',
+                                    'history_score',
+                                    'geography_score',
+                                    'mathematics_score',
+                                    'physical_science_score',
+                                    'life_science_score'
+                                ];
+
+                                subjectInputs.forEach(subjectId => {
+                                    const input = document.getElementById(subjectId);
+                                    if (input) {
+                                        input.addEventListener('input', calculateResults);
+                                    }
+                                });
+
+                                function calculateResults() {
+                                    let total = 0;
+                                    let count = 0;
+
+                                    subjectInputs.forEach(subjectId => {
+                                        const input = document.getElementById(subjectId);
+                                        if (input && input.value) {
+                                            total += parseFloat(input.value) || 0;
+                                            count++;
+                                        }
+                                    });
+
+                                    const totalMarksInput = document.getElementById('total_marks');
+                                    const percentageInput = document.getElementById('percentage');
+
+                                    if (totalMarksInput) {
+                                        totalMarksInput.value = total.toFixed(2);
+                                    }
+
+                                    if (percentageInput && count > 0) {
+                                        const percentage = (total / count).toFixed(2);
+                                        percentageInput.value = percentage;
+                                    }
+                                }
+
+                                // Form submission handling
+                                const admissionForm = document.getElementById('admissionForm');
+                                if (admissionForm) {
+                                    admissionForm.addEventListener('submit', function (e) {
+                                        // Calculate results before submission
+                                        calculateResults();
+
+                                        // Basic validation for required fields
+                                        const requiredFields = this.querySelectorAll('[required]');
+                                        let isValid = true;
+                                        let firstInvalidField = null;
+
+                                        requiredFields.forEach(field => {
+                                            if (!field.value.trim()) {
+                                                isValid = false;
+                                                if (!firstInvalidField) {
+                                                    firstInvalidField = field;
+                                                }
+                                                field.classList.add('is-invalid');
+                                            } else {
+                                                field.classList.remove('is-invalid');
+                                            }
+                                        });
+
+                                        if (!isValid) {
+                                            e.preventDefault();
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Missing Information',
+                                                text: 'Please fill all required fields',
+                                                toast: true,
+                                                position: 'top-end',
+                                                showConfirmButton: false,
+                                                timer: 3000
+                                            });
+
+                                            if (firstInvalidField) {
+                                                firstInvalidField.focus();
+                                            }
+                                            return;
+                                        }
+
+                                        const submitBtn = this.querySelector('button[type="submit"]');
+                                        const originalText = submitBtn.innerHTML;
+                                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+                                        submitBtn.disabled = true;
+                                    });
+                                }
+
+                                // Validate PIN code
+                                const pinCodeInput = document.getElementById('pin_code');
+                                if (pinCodeInput) {
+                                    pinCodeInput.addEventListener('input', function () {
+                                        this.value = this.value.replace(/\D/g, '');
+                                        if (this.value.length > 6) {
+                                            this.value = this.value.slice(0, 6);
+                                        }
+                                    });
+                                }
+
+                                // Validate mobile numbers
+                                const mobileInputs = document.querySelectorAll('input[type="tel"]');
+                                mobileInputs.forEach(input => {
+                                    input.addEventListener('input', function () {
+                                        this.value = this.value.replace(/\D/g, '');
+                                        if (this.value.length > 10) {
+                                            this.value = this.value.slice(0, 10);
+                                        }
+                                    });
+                                });
+
+                                // Validate monthly income
+                                const monthlyIncomeInput = document.getElementById('monthly_income');
+                                if (monthlyIncomeInput) {
+                                    monthlyIncomeInput.addEventListener('input', function () {
+                                        if (this.value < 0) {
+                                            this.value = 0;
+                                        }
+                                    });
+                                }
+
+                                // Validate family members
+                                const familyMembersInput = document.getElementById('total_family_members');
+                                if (familyMembersInput) {
+                                    familyMembersInput.addEventListener('input', function () {
+                                        if (this.value < 1) {
+                                            this.value = 1;
+                                        }
+                                    });
+                                }
+
+                                // Validate subject scores
+                                const subjectScoreInputs = document.querySelectorAll('.subject-card input[type="number"]');
+                                subjectScoreInputs.forEach(input => {
+                                    input.addEventListener('input', function () {
+                                        if (this.value < 0) {
+                                            this.value = 0;
+                                        }
+                                        if (this.value > 100) {
+                                            this.value = 100;
+                                        }
+                                    });
+                                });
+
+                                // Initialize calculation on page load
+                                calculateResults();
+                            });
+                        </script>
+    </body>
+
+</html>

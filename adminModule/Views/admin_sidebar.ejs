@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile-Responsive Admin Dashboard</title>
+    <title>Admin Dashboard | Nababia Mission</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -24,15 +24,16 @@
             --admin-sidebar-width: 260px;
             --admin-header-height: 70px;
             --admin-footer-height: 50px;
-            --admin-transition: all 0.3s ease;
-            --admin-border-radius: 10px;
-            --admin-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --admin-sidebar-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            --admin-transition: all 0.2s ease;
+            --admin-border-radius: 8px;
+            --admin-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --admin-sidebar-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            --admin-active-glow: rgba(52, 152, 219, 0.2);
         }
 
         body {
             background-color: #f5f7fb;
-            color: #495057;
+            color: #000000;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
@@ -61,7 +62,7 @@
             right: 0;
             height: var(--admin-header-height);
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -80,12 +81,12 @@
             background: var(--admin-primary-color);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            margin-right: 15px;
-            font-size: 18px;
+            margin-right: 12px;
+            font-size: 16px;
             transition: var(--admin-transition);
         }
 
@@ -98,45 +99,46 @@
         }
 
         .admin-search-box input {
-            padding: 10px 15px 10px 40px;
+            padding: 8px 12px 8px 36px;
             border: 1px solid #e0e0e0;
-            border-radius: 20px;
+            border-radius: 18px;
             font-size: 14px;
-            width: 250px;
+            width: 220px;
             transition: var(--admin-transition);
         }
 
         .admin-search-box i {
             position: absolute;
-            left: 15px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: #adb5bd;
+            font-size: 14px;
         }
 
         .admin-header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .admin-user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
         }
 
         .admin-user-info img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             object-fit: cover;
         }
 
         .admin-sidebar {
             width: var(--admin-sidebar-width);
-            background: linear-gradient(180deg, var(--admin-primary-color) 0%, var(--admin-secondary-color) 100%);
+            background: #211B34;
             color: white;
             height: 100vh;
             position: fixed;
@@ -148,16 +150,16 @@
         }
 
         .admin-sidebar-header {
-            padding: 20px 15px;
+            padding: 16px 12px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
         }
 
         .admin-sidebar-header h3 {
             font-weight: 600;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             color: white;
@@ -166,26 +168,27 @@
         .admin-sidebar-header h3 i {
             margin-right: 10px;
             background: rgba(255, 255, 255, 0.1);
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 16px;
         }
 
         .admin-sidebar-menu {
-            padding: 10px 0;
+            padding: 6px 0;
         }
 
         .admin-menu-item {
-            padding: 12px 15px;
+            padding: 10px 12px;
             display: flex;
             align-items: center;
             cursor: pointer;
             transition: var(--admin-transition);
-            margin: 4px 10px;
-            border-radius: 8px;
+            margin: 2px 8px;
+            border-radius: 6px;
             position: relative;
             overflow: hidden;
             text-decoration: none;
@@ -199,8 +202,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
         .admin-menu-item:hover::before {
@@ -208,30 +211,60 @@
         }
 
         .admin-menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateX(3px);
         }
 
         .admin-menu-item.active {
-            background-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                0 0 10px var(--admin-active-glow),
+                0 2px 6px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+            transform: translateX(3px);
+            z-index: 1;
+        }
+
+        .admin-menu-item.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--admin-accent-color), var(--admin-success-color));
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 8px var(--admin-accent-color);
+        }
+
+        .admin-menu-item.active i {
+            color: var(--admin-accent-color);
+            text-shadow: 0 0 6px var(--admin-accent-color);
+            transform: scale(1.05);
+        }
+
+        .admin-menu-item.active span {
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         .admin-menu-item i {
-            margin-right: 10px;
-            font-size: 16px;
-            width: 20px;
+            margin-right: 8px;
+            font-size: 15px;
+            width: 18px;
             text-align: center;
             transition: var(--admin-transition);
         }
 
         .admin-menu-item:hover i {
             color: var(--admin-accent-color);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .admin-menu-item span {
-            font-size: 14px;
+            font-size: 13.5px;
             transition: var(--admin-transition);
         }
 
@@ -242,22 +275,22 @@
         .admin-submenu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.8s ease;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin: 0 10px;
+            transition: max-height 0.6s ease;
+            background-color: rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            margin: 0 8px;
         }
 
         .admin-submenu.open {
-            max-height: 500px;
+            max-height: 300px;
         }
 
         .admin-submenu-item {
-            padding: 10px 15px 10px 45px;
+            padding: 8px 12px 8px 38px;
             transition: var(--admin-transition);
-            border-radius: 6px;
-            margin: 3px;
-            font-size: 13px;
+            border-radius: 5px;
+            margin: 2px;
+            font-size: 12.5px;
             position: relative;
             display: block;
             text-decoration: none;
@@ -267,61 +300,84 @@
         .admin-submenu-item::before {
             content: '';
             position: absolute;
-            left: 25px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.4);
             transition: var(--admin-transition);
         }
 
         .admin-submenu-item:hover::before {
             background-color: var(--admin-accent-color);
-            transform: translateY(-50%) scale(1.5);
+            transform: translateY(-50%) scale(1.3);
         }
 
         .admin-submenu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding-left: 50px;
+            background-color: rgba(255, 255, 255, 0.08);
+            padding-left: 42px;
         }
 
         .admin-submenu-item.active {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.12);
             font-weight: 500;
+            box-shadow:
+                0 0 8px rgba(52, 152, 219, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .admin-submenu-item.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 65%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--admin-accent-color), var(--admin-success-color));
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 6px var(--admin-accent-color);
+        }
+
+        .admin-submenu-item.active::before {
+            background-color: var(--admin-accent-color);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 4px var(--admin-accent-color);
         }
 
         .admin-main-content {
             margin-left: var(--admin-sidebar-width);
-            padding: 20px;
-            padding-top: calc(var(--admin-header-height) + 20px);
+            padding: 16px;
+            padding-top: calc(var(--admin-header-height) + 16px);
             transition: var(--admin-transition);
             min-height: 100vh;
         }
-
-        
 
         .admin-dashboard-container {
             display: flex;
         }
 
         .dashboard-content {
-            padding: 20px;
+            flex: 1;
+            padding: 16px;
         }
 
         .dashboard-section {
             background: white;
             border-radius: var(--admin-border-radius);
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             box-shadow: var(--admin-card-shadow);
         }
 
         .dashboard-section h2 {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--admin-primary-color);
             font-weight: 600;
+            font-size: 1.5rem;
         }
 
         .stats-grid {
@@ -338,6 +394,12 @@
             box-shadow: var(--admin-card-shadow);
             display: flex;
             align-items: center;
+            transition: var(--admin-transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .stat-icon {
@@ -348,7 +410,7 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            margin-right: 15px;
+            margin-right: 16px;
         }
 
         .stat-info {
@@ -356,89 +418,98 @@
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            color: var(--admin-primary-color);
         }
 
         .stat-label {
             color: #6c757d;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .users-icon {
-            background: rgba(52, 152, 219, 0.1);
+            background: rgba(52, 152, 219, 0.08);
             color: var(--admin-accent-color);
         }
 
         .revenue-icon {
-            background: rgba(46, 204, 113, 0.1);
+            background: rgba(46, 204, 113, 0.08);
             color: var(--admin-success-color);
         }
 
         .orders-icon {
-            background: rgba(241, 196, 15, 0.1);
+            background: rgba(241, 196, 15, 0.08);
             color: #f1c40f;
         }
 
         .pending-icon {
-            background: rgba(231, 76, 60, 0.1);
+            background: rgba(231, 76, 60, 0.08);
             color: var(--admin-danger-color);
         }
 
-        @media (max-width: 576px) {
-            :root {
-                --admin-header-height: 60px;
-                --admin-footer-height: 40px;
-            }
-
-            .admin-main-content {
-                padding: 12px;
-                padding-top: calc(var(--admin-header-height) + 12px);
-                padding-bottom: calc(var(--admin-footer-height) + 12px);
-            }
-
-            .admin-search-box input {
-                width: 180px;
-            }
+        .recent-activity {
+            margin-top: 20px;
         }
 
-        @media (max-width: 400px) {
-            .admin-main-content {
-                padding: 10px;
-                padding-top: calc(var(--admin-header-height) + 10px);
-                padding-bottom: calc(var(--admin-footer-height) + 10px);
-            }
-
-            .admin-header {
-                padding: 0 10px;
-            }
-
-            .admin-user-info span {
-                display: none;
-            }
-
-            .admin-search-box input {
-                width: 140px;
-                padding-left: 35px;
-            }
+        .activity-list {
+            list-style: none;
         }
 
+        .activity-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            background: rgba(52, 152, 219, 0.08);
+            color: var(--admin-accent-color);
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .activity-time {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        /* Media Queries */
         @media (max-width: 1200px) {
             .admin-sidebar {
                 width: 220px;
             }
 
             .admin-main-content,
-            .admin-header,
-            .admin-footer {
+            .admin-header {
                 margin-left: 220px;
             }
         }
 
         @media (max-width: 992px) {
             .admin-sidebar {
-                width: 70px;
+                width: 60px;
                 overflow: visible;
             }
 
@@ -450,19 +521,18 @@
 
             .admin-menu-item {
                 justify-content: center;
-                padding: 12px;
-                margin: 4px 8px;
+                padding: 10px;
+                margin: 2px 6px;
             }
 
             .admin-menu-item i {
                 margin-right: 0;
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .admin-main-content,
-            .admin-header,
-            .admin-footer {
-                margin-left: 70px;
+            .admin-header {
+                margin-left: 60px;
             }
 
             .admin-sidebar:hover {
@@ -477,13 +547,13 @@
 
             .admin-sidebar:hover .admin-menu-item {
                 justify-content: flex-start;
-                padding: 12px 15px;
-                margin: 4px 10px;
+                padding: 10px 12px;
+                margin: 2px 8px;
             }
 
             .admin-sidebar:hover .admin-menu-item i {
-                margin-right: 10px;
-                font-size: 16px;
+                margin-right: 8px;
+                font-size: 15px;
             }
         }
 
@@ -500,16 +570,11 @@
             }
 
             .admin-main-content,
-            .admin-header,
-            .admin-footer {
+            .admin-header {
                 margin-left: 0;
             }
 
             .admin-header {
-                left: 0;
-            }
-
-            .admin-footer {
                 left: 0;
             }
 
@@ -525,23 +590,31 @@
 
             .admin-sidebar.open .admin-menu-item {
                 justify-content: flex-start;
-                padding: 12px 15px;
-                margin: 4px 10px;
+                padding: 10px 12px;
+                margin: 2px 8px;
             }
 
             .admin-sidebar.open .admin-menu-item i {
-                margin-right: 10px;
-                font-size: 16px;
+                margin-right: 8px;
+                font-size: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             .admin-main-content {
-                padding: 15px;
-                padding-top: calc(var(--admin-header-height) + 15px);
-                padding-bottom: calc(var(--admin-footer-height) + 15px);
+                padding: 12px;
+                padding-top: calc(var(--admin-header-height) + 12px);
             }
         }
 
         @media (max-width: 576px) {
+            :root {
+                --admin-header-height: 56px;
+            }
+
             .admin-header {
                 padding: 0 12px;
             }
@@ -551,13 +624,14 @@
             }
 
             .admin-header-right {
-                gap: 10px;
+                gap: 8px;
             }
 
             .admin-toggle-sidebar {
                 width: 32px;
                 height: 32px;
-                font-size: 16px;
+                font-size: 14px;
+                margin-right: 8px;
             }
 
             .admin-user-info img {
@@ -565,8 +639,30 @@
                 height: 32px;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .admin-search-box input {
+                width: 160px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-right: 12px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .admin-search-box input {
+                width: 130px;
+                padding-left: 32px;
             }
         }
 
@@ -595,8 +691,8 @@
         </div>
         <div class="admin-header-right">
             <div class="admin-user-info">
-                <a href=""></a> <img src="https://img.freepik.com/free-vector/business-user-shield_78370-7029.jpg"
-                    alt="User"></a>
+                <img src="https://img.freepik.com/free-vector/business-user-shield_78370-7029.jpg" alt="User">
+                <span>Admin User</span>
             </div>
         </div>
     </div>
@@ -604,98 +700,85 @@
     <div class="admin-dashboard-container">
         <div class="admin-sidebar" id="admin-sidebar">
             <div class="admin-sidebar-header">
-                <h3><i class="fas fa-chart-pie"></i> <span>AdminPro</span></h3>
+                <h3><i class="fas fa-chart-pie"></i> <span>Nababia Mission</span></h3>
             </div>
             <div class="admin-sidebar-menu">
-                <a href="/coolmate/admin" class="admin-menu-item active">
+                <a href="/nm/admin-dashboard" class="admin-menu-item active">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
 
-                <div class="admin-menu-item" onclick="toggleAdminSubmenu('users')">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
-                    <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
-                </div>
-                <div class="admin-submenu" id="users-submenu">
-                    <a href="#all-users" class="admin-submenu-item active">All Users</a>
-                    <a href="#admins" class="admin-submenu-item">Admins</a>
-                    <a href="#customers" class="admin-submenu-item">Customers</a>
-                    <a href="#moderators" class="admin-submenu-item">Moderators</a>
-                </div>
-
-                <div class="admin-menu-item" onclick="toggleAdminSubmenu('services')">
-                    <i class="fas fa-concierge-bell"></i>
-                    <span>Services</span>
-                    <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
-                </div>
-                <div class="admin-submenu" id="services-submenu">
-                    <a href="/coolmate/admin/service-list" class="admin-submenu-item">All Services</a>
-                    <a href="/coolmate/admin/add-service" class="admin-submenu-item">Add New </a>
-
-                </div>
-
-                <div class="admin-menu-item" onclick="toggleAdminSubmenu('booking')">
-                    <i class="fas fa-calendar-check"></i>
-                    <span>Booking</span>
-                    <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
-                </div>
-                <div class="admin-submenu" id="booking-submenu">
-                    <a href="/coolmate/admin/booking" class="admin-submenu-item">All Bookings</a>
-                    <a href="#pending-bookings" class="admin-submenu-item"> Add New</a>
-
-                </div>
 
 
-                <a href="/coolmate/admin/report" class="admin-menu-item">
+
+                <div class="admin-menu-item" onclick="toggleAdminSubmenu('registration')">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Registration - 2026</span>
+                    <i class="fas fa-chevron-down" style="margin-left: auto; font-size: 12px;"></i>
+                </div>
+                <div class="admin-submenu" id="registration-submenu">
+                    <a href="/nm/admin-dashboard/admission-list" class="admin-submenu-item">All Registration</a>
+                    <a href="#" class="admin-submenu-item">Add New</a>
+                </div>
+
+                <a href="#" class="admin-menu-item">
                     <i class="fas fa-flag"></i>
-                    <span> Report</span>
+                    <span>Report</span>
                 </a>
 
-                <a href="/coolmate/admin/make-invoice" class="admin-menu-item">
-                    <i class="fa-solid fa-file-invoice"></i>
-                    <span>Make Invoice</span>
-                </a>
-
-
-                <a href="/coolmate/admin/report" class="admin-menu-item">
+                <a href="#" class="admin-menu-item">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
                 </a>
 
-
-                <a href="/logout" class="admin-menu-item">
+                <a href="#" onclick="adminLogout()" class="admin-menu-item">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
-
             </div>
         </div>
 
 
-
     </div>
 
-    
-
     <script>
-        // Toggle submenu
+
+
+        const adminLogout = () => {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Logout!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    window.location.href = '/logout'
+                }
+            });
+
+        }
+
+
         function toggleAdminSubmenu(id) {
             const submenu = document.getElementById(`${id}-submenu`);
             const allSubmenus = document.querySelectorAll('.admin-submenu');
 
-            // Close all other submenus
             allSubmenus.forEach(sub => {
                 if (sub.id !== `${id}-submenu` && sub.classList.contains('open')) {
                     sub.classList.remove('open');
                 }
             });
 
-            // Toggle the clicked submenu
-            submenu.classList.toggle('open');
+            if (submenu) {
+                submenu.classList.toggle('open');
+            }
         }
 
-        // Toggle sidebar on mobile and tablet
         function toggleAdminSidebar() {
             const sidebar = document.getElementById('admin-sidebar');
             const overlay = document.getElementById('admin-overlay');
@@ -703,60 +786,48 @@
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
 
-            // Prevent body scrolling when sidebar is open on mobile
             if (window.innerWidth < 768) {
                 document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
             }
         }
 
-        // Close sidebar when clicking on overlay
         document.getElementById('admin-overlay').addEventListener('click', function () {
             toggleAdminSidebar();
         });
 
-        // Add active class to menu items
         document.querySelectorAll('.admin-menu-item').forEach(item => {
             item.addEventListener('click', function (e) {
-                // Don't toggle if it's a parent of a submenu
                 if (this.querySelector('.fa-chevron-down')) {
                     e.preventDefault();
                     return;
                 }
 
-                // Remove active class from all menu items
                 document.querySelectorAll('.admin-menu-item').forEach(i => {
                     i.classList.remove('active');
                 });
 
-                // Add active class to clicked menu item
                 this.classList.add('active');
 
-                // Close sidebar after selection on mobile
                 if (window.innerWidth < 768) {
                     toggleAdminSidebar();
                 }
             });
         });
 
-        // Add active class to submenu items
         document.querySelectorAll('.admin-submenu-item').forEach(item => {
             item.addEventListener('click', function () {
-                // Remove active class from all submenu items
                 document.querySelectorAll('.admin-submenu-item').forEach(i => {
                     i.classList.remove('active');
                 });
 
-                // Add active class to clicked submenu item
                 this.classList.add('active');
 
-                // Close sidebar after selection on mobile
                 if (window.innerWidth < 768) {
                     toggleAdminSidebar();
                 }
             });
         });
 
-        // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function (event) {
             const sidebar = document.getElementById('admin-sidebar');
             const toggleBtn = document.querySelector('.admin-toggle-sidebar');
@@ -764,12 +835,11 @@
             if (window.innerWidth < 768 &&
                 sidebar.classList.contains('open') &&
                 !sidebar.contains(event.target) &&
-                !toggleBtn.contains(event.target)) {
+                (!toggleBtn || !toggleBtn.contains(event.target))) {
                 toggleAdminSidebar();
             }
         });
 
-        // Adjust sidebar on window resize
         window.addEventListener('resize', function () {
             const sidebar = document.getElementById('admin-sidebar');
             const overlay = document.getElementById('admin-overlay');
@@ -780,6 +850,18 @@
                 document.body.style.overflow = '';
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const dashboardItem = document.querySelector('.admin-menu-item[href="/mmr-admin"]');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active');
+            }
+        });
+
+
+
+
+
     </script>
 </body>
 

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Signup - Nababia Mission</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --primary: #4361EE;
+            --secondary: #0b9717;
+            --accent: #F72585;
+            --light-bg: #F8F9FA;
+            --dark-text: #212529;
+            --light-text: #6C757D;
+            --white: #ffffff;
+            --card-bg: #FFFFFF;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .auth-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .auth-left {
+            flex: 1;
+            background-color: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            clip-path: circle(40% at 10% 10%);
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .auth-left::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            clip-path: circle(30% at 90% 90%);
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .auth-right {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .auth-content {
+            max-width: 450px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+
+        .auth-form {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            background-color: var(--light-bg);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon .form-control {
+            padding-left: 2.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--light-text);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-right-content {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .auth-right-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .auth-right-content p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .auth-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .form-group.error .form-control {
+            border-color: var(--danger-color);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background-color: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 0.25rem;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-text {
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+        }
+
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .terms-check input {
+            margin-top: 0.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .terms-check label {
+            font-size: 0.875rem;
+            color: var(--light-text);
+            line-height: 1.4;
+        }
+
+        .terms-check a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .terms-check a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 1024px) {
+            .auth-container {
+                flex-direction: column;
+            }
+
+            .auth-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .auth-left {
+                padding: 1rem;
+            }
+
+            .auth-content {
+                max-width: 100%;
+            }
+
+            .auth-form {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                margin-bottom: 1.5rem;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .auth-header {
+                margin-bottom: 1.25rem;
+            }
+
+            .auth-header h2 {
+                font-size: 1.25rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-control {
+                padding: 0.625rem 0.875rem;
+            }
+
+            .input-with-icon .form-control {
+                padding-left: 2.25rem;
+            }
+
+            .input-icon {
+                left: 0.75rem;
+            }
+
+            .password-toggle {
+                right: 0.75rem;
+            }
+
+            .btn {
+                padding: 0.625rem 1.25rem;
+            }
+
+            .auth-footer {
+                margin-top: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-left {
+                padding: 2rem;
+            }
+
+            .auth-form {
+                padding: 1.25rem;
+            }
+
+            .logo {
+                margin-bottom: 1.25rem;
+            }
+
+            .logo i {
+                font-size: 28px;
+                padding: 6px;
+                margin-right: 10px;
+            }
+
+            .logo h1 {
+                font-size: 1.4rem;
+            }
+
+            .auth-header {
+                margin-bottom: 1rem;
+            }
+
+            .auth-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .form-group {
+                margin-bottom: 0.875rem;
+            }
+
+            .form-control {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .input-with-icon .form-control {
+                padding-left: 2rem;
+            }
+
+            .input-icon {
+                left: 0.625rem;
+                font-size: 0.875rem;
+            }
+
+            .password-toggle {
+                right: 0.625rem;
+                font-size: 0.875rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .auth-footer {
+                margin-top: 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .auth-left {
+                padding: 1rem;
+            }
+
+            .auth-form {
+                padding: 1.3rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            .logo i {
+                font-size: 24px;
+                padding: 5px;
+                margin-right: 8px;
+            }
+
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+
+            .auth-header {
+                margin-bottom: 0.875rem;
+            }
+
+            .auth-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+
+            .form-control {
+                padding: 0.45rem 0.625rem;
+                font-size: 0.75rem;
+            }
+
+            .input-with-icon .form-control {
+                padding-left: 1.75rem;
+            }
+
+            .input-icon {
+                left: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .password-toggle {
+                right: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.45rem 0.875rem;
+                font-size: 0.75rem;
+            }
+
+            .auth-footer {
+                margin-top: 0.875rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<% if (messages.success) { %>
+        <script>
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "<%= messages.success %>",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                iconColor: "#00b894",
+                color: "#333",
+                customClass: {
+                    popup: 'custom-swal-toast'
+                },
+                didOpen: (toast) => {
+                    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                    toast.style.borderRadius = '8px';
+                    toast.style.padding = '0.75rem 1.25rem';
+                }
+            });
+        </script>
+        <% } %>
+
+            <% if (messages.error) { %>
+                <script>
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "<%= messages.error %>",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: "#ffffff",
+                        iconColor: "red",
+                        color: "#333",
+                        customClass: {
+                            popup: 'custom-swal-toast'
+                        },
+                        didOpen: (toast) => {
+                            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                            toast.style.borderRadius = '8px';
+                            toast.style.padding = '0.75rem 1.25rem';
+                        }
+                    });
+                </script>
+                <% } %>
+
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="auth-content">
+                <div class="logo">
+                    <i class="fas fa-user-shield"></i>
+                    <h1>Admin <span class="admin-badge">SIGNUP</span></h1>
+                </div>
+
+                <div class="auth-form">
+                    <div class="auth-header">
+                        <h2>Create Admin Account</h2>
+                        <p>Fill in the details below to register as an administrator</p>
+                    </div>
+
+                    <form id="signupForm" method="post" action="/nm/admin-signup">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="fullName" class="form-control" placeholder="Enter your full name"
+                                    required name="name">
+                            </div>
+                            <div class="error-message">Please enter your full name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Admin Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="email" class="form-control"
+                                    placeholder="Enter your email address" required name="email">
+                            </div>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone input-icon"></i>
+                                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number"
+                                    required name="mobile">
+                            </div>
+                            <div class="error-message">Please enter a valid phone number</div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="password" class="form-control"
+                                    placeholder="Create a strong password" required name="password">
+                                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus" style="margin-right: 8px;"></i> Create Admin Account
+                        </button>
+                    </form>
+
+                    <div class="auth-footer">
+                        Already have an account? <a href="/nm/admin-login">Sign in here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-right-content">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZnCqhXyWuJB-G3UJAXRtO-v3qB8NITxfbJjJeLZMvTbRxEz9TIA4IfL2LHMMTlQzzxVxoHcbumXEoQap4xWfqAwqI-m58Epksx8cgVmnVNYid6sXXdDIDxxKKvZdVre5XmUM92HsfqFcj9ba9dGjez3aYSDBl5JD9iwHSfX9DZlRdjkU6gRy8NQeXhH7c/w640-h604/WhatsApp%20Image%202026-02-08%20at%208.19.48%20PM.jpeg"
+                    alt="FFSM Library Admin" class="auth-image"
+                    style="width: 300px; height: 300px; border-radius: 10px; margin-bottom: 2rem;">
+                <h2>Join NM Admin Team</h2>
+                <p>Create your admin account to access the library management system, manage books, students, and system
+                    configurations.</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        document.getElementById('signupForm').addEventListener('submit', () => {
+
+            const signupForm = document.getElementById('signupForm');
+            const allInput = signupForm.querySelectorAll('input[type="text"], input[type="number"], textarea')
+            allInput.forEach((ai) => {
+                ai.value = ai.value.trim();
+            })
+        })
+
+    </script>
+</body>
+
+</html>

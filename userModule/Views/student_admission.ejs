@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>Student Admission Form | Nababia Mission (all sections)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #460C4C;
+            --primary-dark: #2c0830;
+            --light-bg: #f8fff8;
+            --text-dark: #155a2d;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: "Segoe UI", "Nikosh", "SolaimanLipi", Arial, sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 15px 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 5px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+        }
+
+        .help-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .help-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .form-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .form-control,
+        .form-select {
+            font-size: 0.85rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 30px;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            padding: 8px 20px;
+            background: white;
+            border-radius: 30px;
+        }
+
+        .btn-outline-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .file-input-container {
+            margin-bottom: 15px;
+        }
+
+        .payment-details {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            border: 3px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 6px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(70, 12, 76, 0.2);
+        }
+
+        .qr-code img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(70, 12, 76, 0.35);
+        }
+
+        .payment-screenshot-upload {
+            margin-top: 25px;
+        }
+
+        .bank-detail-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .important-notice {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .important-notice h6 {
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .instruction-docs {
+            background-color: #fafafa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #460C4C;
+        }
+
+        .doc-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .doc-list li {
+            padding: 6px 0 6px 28px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23460C4C"><path d="M20 6L9 17l-5-5-1.5 1.5L9 20 21.5 7.5z"/></svg>') left center no-repeat;
+            background-size: 18px;
+            font-size: 0.9rem;
+        }
+
+        .modal-header.bg-primary-custom {
+            background-color: #460C4C;
+            color: white;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .qr-modal .modal-body img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            border: 4px solid var(--primary-color);
+            padding: 8px;
+            background: white;
+        }
+
+        .subject-marks-row {
+            background: #f2f7f2;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .subject-name {
+            font-weight: 600;
+            color: #1e4a2c;
+            font-size: 0.9rem;
+            width: 100px;
+        }
+
+        .marks-input {
+            width: 100px;
+            flex: 1;
+            min-width: 80px;
+            max-width: 120px;
+        }
+
+        .total-percentage-box {
+            background: #e1f0e1;
+            padding: 14px;
+            border-radius: 16px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .total-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .total-item span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .readonly-field {
+            background-color: #e9ecef;
+            border: none;
+            font-weight: 600;
+            width: 100px;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+
+        .file-size-error {
+            border: 2px solid #dc3545 !important;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+        }
+
+        .file-size-warning {
+            font-size: 0.75rem;
+            color: #dc3545;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .required-error {
+            color: #dc3545;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .required-error.show {
+            display: block;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .science-percentage-box {
+            background: #460C4C15;
+            padding: 14px;
+            border-radius: 16px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 5px solid #460C4C;
+        }
+
+        .science-percentage-box .total-item span {
+            color: #460C4C;
+        }
+
+        .science-percentage-box .readonly-field {
+            background-color: #e4d7e5;
+            color: #460C4C;
+            font-weight: 700;
+        }
+
+        /* mobile adjustments */
+        @media (max-width: 576px) {
+            .header h2 {
+                font-size: 1.1rem;
+            }
+
+            .logo {
+                width: 48px;
+                height: 48px;
+                margin-right: 8px;
+            }
+
+            .subject-marks-row {
+                padding: 8px;
+            }
+
+            .subject-name {
+                width: 80px;
+                font-size: 0.85rem;
+            }
+
+            .marks-input {
+                max-width: 90px;
+            }
+
+            .readonly-field {
+                width: 80px;
+            }
+
+            .total-percentage-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .instruction-docs h4 {
+                font-size: 0.9rem !important;
+            }
+
+            .doc-list li {
+                font-size: 0.75rem;
+                padding: 3px 0 3px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <% if (messages && messages.success) { %>
+        <script>
+            Swal.fire({ toast: true, position: "top-end", icon: "success", title: "<%= messages.success %>", showConfirmButton: false, timer: 3000, timerProgressBar: true, background: "#ffffff", iconColor: "#00b894", color: "#333" });
+        </script>
+        <% } %>
+            <% if (messages && messages.error) { %>
+                <script>
+                    Swal.fire({ toast: true, position: "top-end", icon: "error", title: "<%= messages.error %>", showConfirmButton: false, timer: 3000, timerProgressBar: true, background: "#ffffff", iconColor: "#d32f2f", color: "#333" });
+                </script>
+                <% } %>
+
+                    <div class="container py-3 px-2 px-sm-3">
+                        <div class="header">
+                            <div class="logo-container">
+                                <div class="logo">
+                                    <img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZnCqhXyWuJB-G3UJAXRtO-v3qB8NITxfbJjJeLZMvTbRxEz9TIA4IfL2LHMMTlQzzxVxoHcbumXEoQap4xWfqAwqI-m58Epksx8cgVmnVNYid6sXXdDIDxxKKvZdVre5XmUM92HsfqFcj9ba9dGjez3aYSDBl5JD9iwHSfX9DZlRdjkU6gRy8NQeXhH7c/w640-h604/WhatsApp%20Image%202026-02-08%20at%208.19.48%20PM.jpeg'
+                                        alt="Madrasa Logo">
+                                </div>
+                                <div class="header-text">
+                                    <h2>Nababia Mission</h2>
+                                    <p class="mb-0">Student Admission Form - 2026 (Class XI)</p>
+                                    <p class="mb-0">Helpline: 7797593863</p>
+                                </div>
+                            </div>
+                            <button class="help-btn" id="helpButton"><i class="fas fa-question"></i></button>
+                        </div>
+
+                        <div class="important-notice">
+                            <h6><i class="fas fa-exclamation-triangle me-2"></i>Important Notice</h6>
+                            <ul class="mb-0 ps-3">
+                                <li>Fill the form in English </li>
+                                <li>Registration fee only ₹250</li>
+                                <li>For Class XI, secondary result & division selection mandatory</li>
+                                <li><strong class="text-danger">All photos/signatures must be 10KB - 200KB</strong></li>
+                                <li><strong>All fields are required except Mobile 2</strong></li>
+                            </ul>
+                        </div>
+
+                        <form id="registrationForm" method="post" action="/nm/student-admission"
+                            enctype="multipart/form-data">
+
+                            <div class="form-section" id="section-1">
+                                <h5 class="mb-3 text-success">1. Student Basic Information</h5>
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <label class="form-label">Student Name (English) <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="student_name_eng" required>
+                                        <div class="required-error" data-for="student_name_eng">This field is required
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Student Name (Capital) <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="student_name_capital" required>
+                                        <div class="required-error" data-for="student_name_capital">This field is
+                                            required</div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label class="form-label">Date of Birth <span
+                                                class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="dob" required>
+                                        <div class="required-error" data-for="dob">This field is required</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Student Photo <span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control file-size-limit" accept="image/*"
+                                            name="student_photo" data-max-kb="200" data-min-kb="10" required>
+                                        <div class="form-text">JPG, PNG (max 200KB, min 10KB)</div>
+                                        <div class="file-size-warning" id="warn_student_photo"></div>
+                                        <div class="required-error" data-for="student_photo">This file is required</div>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label class="form-label fw-bold">Student Signature <span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control file-size-limit" accept="image/*"
+                                            name="student_signature" required data-max-kb="200" data-min-kb="10">
+                                        <div class="form-text">JPG, PNG (10KB - 200KB) - upload signature image</div>
+                                        <div class="file-size-warning" id="warn_student_signature"></div>
+                                        <div class="required-error" data-for="student_signature">This file is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-2">
+                                <h5 class="mb-3 text-success">2. Guardian Information</h5>
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <label class="form-label">Guardian Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="guardian_name" required>
+                                        <div class="required-error" data-for="guardian_name">This field is required
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Relation <span class="text-danger">*</span></label>
+                                        <select class="form-select" name="relation_with_student" required>
+                                            <option value="">Select Relation</option>
+                                            <option value="Father">Father</option>
+                                            <option value="Mother">Mother</option>
+                                            <option value="Guardian">Guardian</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <div class="required-error" data-for="relation_with_student">This field is
+                                            required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Occupation <span class="text-danger">*</span></label>
+                                        <select class="form-select" name="guardian_occupation" required>
+                                            <option value="">Select Occupation</option>
+                                            <option value="Farmer">Farmer</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Service">Service</option>
+                                            <option value="Teacher">Teacher</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <div class="required-error" data-for="guardian_occupation">This field is
+                                            required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Mother's Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="mother_name" required>
+                                        <div class="required-error" data-for="mother_name">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Mother's Occupation <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="mother_occupation" required>
+                                        <div class="required-error" data-for="mother_occupation">This field is required
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Guardian Signature <span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control file-size-limit" accept="image/*"
+                                            name="guardian_signature" required data-max-kb="200" data-min-kb="10">
+                                        <div class="form-text">JPG, PNG (10KB - 200KB)</div>
+                                        <div class="file-size-warning" id="warn_guardian_signature"></div>
+                                        <div class="required-error" data-for="guardian_signature">This file is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-3">
+                                <h5 class="mb-3 text-success">3. Family Information</h5>
+                                <div class="row g-3">
+                                    <div class="col-6 col-sm-4">
+                                        <label class="form-label">Total Members <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" min="1" name="total_family_members"
+                                            placeholder="e.g., 4" required>
+                                        <div class="required-error" data-for="total_family_members">This field is
+                                            required</div>
+                                    </div>
+                                    <div class="col-6 col-sm-4">
+                                        <label class="form-label">Total Earners <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" min="0" name="total_earner"
+                                            placeholder="e.g., 2" required>
+                                        <div class="required-error" data-for="total_earner">This field is required</div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label class="form-label">Monthly Income (₹) <span
+                                                class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="number" class="form-control" min="0"
+                                                name="family_monthly_income" placeholder="e.g., 25000" required>
+                                        </div>
+                                        <div class="required-error" data-for="family_monthly_income">This field is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-4">
+                                <h5 class="mb-3 text-success">4. Address</h5>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <label class="form-label">Village/Locality <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="village" required>
+                                        <div class="required-error" data-for="village">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Post Office <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="post_office" required>
+                                        <div class="required-error" data-for="post_office">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Police Station <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="police_station" required>
+                                        <div class="required-error" data-for="police_station">This field is required
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">District <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="district" required>
+                                        <div class="required-error" data-for="district">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Pin Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="pin_code" required>
+                                        <div class="required-error" data-for="pin_code">This field is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-5">
+                                <h5 class="mb-3 text-success">5. Contact & Exam Center</h5>
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold">Exam Center <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="exam_center" required>
+                                            <option value="">Select</option>
+                                            <option value="Nababia Mission">Nababia Mission</option>
+
+                                        </select>
+                                        <div class="required-error" data-for="exam_center">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Mobile 1 <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" name="mobile_1"
+                                            pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+                                        <div class="required-error" data-for="mobile_1">This field is required</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Mobile 2</label>
+                                        <input type="tel" class="form-control" name="mobile_2"
+                                            pattern="[6-9]{1}[0-9]{9}" maxlength="10">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Current Institute <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="current_institute" required>
+                                        <div class="required-error" data-for="current_institute">This field is required
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Current Class <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="current_class" required>
+                                            <option value="">Select Class</option>
+                                            <option value="Class X">Class X</option>
+                                            <option value="Class XI">Class XI</option>
+                                        </select>
+                                        <div class="required-error" data-for="current_class">This field is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-6">
+                                <h5 class="mb-3 text-success">6. Secondary Result & Division</h5>
+                                <div class="alert alert-info py-2 small">Enter marks for each subject. Total &
+                                    percentage will auto-calculate.</div>
+
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">Bengali <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="bengali"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="bengali">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">English <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="english"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="english">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">Math <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="math"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="math">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">Physical Science <span
+                                            class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="phy_science"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="phy_science">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">Life Science <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="life_science"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="life_science">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">Geography <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="geo" placeholder="Marks"
+                                        min="0" max="100" step="0.01" oninput="calculateResult()" required>
+                                    <div class="required-error" data-for="geo">This field is required</div>
+                                </div>
+                                <div class="subject-marks-row">
+                                    <span class="subject-name">History <span class="text-danger">*</span></span>
+                                    <input type="number" class="form-control marks-input" name="history"
+                                        placeholder="Marks" min="0" max="100" step="0.01" oninput="calculateResult()"
+                                        required>
+                                    <div class="required-error" data-for="history">This field is required</div>
+                                </div>
+
+                                <div class="total-percentage-box">
+                                    <div class="total-item">
+                                        <span>Total Marks:</span>
+                                        <input type="text" id="totalMarksInput" class="readonly-field"
+                                            name="total_marks" value="0.00" readonly>
+                                    </div>
+                                    <div class="total-item">
+                                        <span>Percentage:</span>
+                                        <input type="text" id="percentageInput" class="readonly-field" name="percentage"
+                                            value="0.00%" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="science-percentage-box">
+                                    <div class="total-item">
+                                        <span>Science (Math + Phy + Life):</span>
+                                        <input type="text" id="sciencePercentageInput" class="readonly-field"
+                                            name="science_percentage" value="0.00%" readonly>
+                                    </div>
+                                    <div class="total-item">
+                                        <span>Science Total:</span>
+                                        <input type="text" id="scienceTotalInput" class="readonly-field"
+                                            name="science_total" value="0.00" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row g-2 mt-2">
+                                    <div class="col-12 col-sm-6">
+                                        <label class="form-label fw-bold">Class XI Division <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="applied_division" required>
+                                            <option value="" selected>-- Select Division --</option>
+                                            <option value="Arts">Arts</option>
+                                            <option value="Science">Science</option>
+                                        </select>
+                                        <div class="required-error" data-for="applied_division">This field is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section" id="section-7">
+                                <h5 class="mb-3 text-success">7. Payment Information</h5>
+                                <div class="payment-details">
+                                    <h6 class="text-success mb-3">PhonePe Payment (₹250)</h6>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 text-center">
+                                            <div class="qr-code">
+                                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqefYdvv3ZepXiL2kiRXievv_t-nTMnlH8U6S-zi4HyLIFOLExNmogNPJ0rhoNzmYOk40WWdYnC8e41iQVmP4vTwUBapNPe3YSFAAC7dRkPAH2xFoae6S9TToP0wP25HNnCtGDNtCqbau1CGBYy0ftUa7zD-DSfIEmQFL7IXVun6ShNMbC2vdSZq5Zjn3m/w380-h640/WhatsApp%20Image%202026-02-12%20at%2011.17.43%20AM.jpeg"
+                                                    alt="QR Code" id="qrCodeImage" class="clickable-qr">
+                                            </div>
+                                            <p class="small text-muted mt-2">Click QR to enlarge</p>
+                                        </div>
+                                        <div class="col-md-6 mt-3 mt-md-0">
+                                            <div class="bank-detail-item"><strong>Account Name:</strong>
+                                                <p class="mb-0">Nababia Mission</p>
+                                            </div>
+                                            <div class="bank-detail-item"><strong>Amount:</strong>
+                                                <p class="mb-0">₹250 (fixed)</p>
+                                            </div>
+                                            <div class="mt-3 p-3 bg-light rounded small">
+                                                <strong>Instructions:</strong>
+                                                <ul class="mb-0 ps-3">
+                                                    <li>Scan QR and pay ₹250</li>
+                                                    <li>Upload screenshot (10KB - 200KB)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="payment-screenshot-upload mt-4">
+                                        <h6 class="text-success mb-2">Payment Screenshot <span
+                                                class="text-danger">*</span></h6>
+                                        <input type="file" class="form-control file-size-limit" accept="image/*"
+                                            name="paymentScreenshot" required data-max-kb="200" data-min-kb="10">
+                                        <div class="form-text">JPG/PNG, 10KB-200KB, ₹250 must be visible</div>
+                                        <div class="file-size-warning" id="warn_paymentScreenshot"></div>
+                                        <div class="required-error" data-for="paymentScreenshot">This file is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-4 mb-5">
+                                <button type="submit" id="finalSubmitBtn" class="btn btn-custom px-5 py-2">Submit
+                                    Registration</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal fade" id="instructionModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary-custom" style="background:#460C4C;color:white;">
+                                    <h5 class="modal-title"><i class="fas fa-file-alt me-2"></i>Required Documents</h5>
+                                    <button type="button" class="btn-close btn-close-white"
+                                        data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="instruction-docs">
+                                        <h4 style="color:#460C4C; font-size:1.1rem;">Submit with Admission Form</h4>
+                                        <ul class="doc-list">
+                                            <li><strong>Birth Certificate Xerox (1 copy)</strong></li>
+                                            <li><strong>Aadhar Card Xerox (1 copy)</strong></li>
+                                            <li><strong>Passport size photo (2 copies)</strong></li>
+                                            <li><strong>Secondary Marksheet Xerox</strong></li>
+                                            <li><strong>Student Signature (10-200KB image)</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="instruction-docs">
+                                        <h4 style="color:#460C4C; font-size:1.1rem;">📋 On Counselling Day</h4>
+                                        <ul class="doc-list">
+                                            <li><strong>Birth Certificate (2 copies)</strong></li>
+                                            <li><strong>Permanent Resident Certificate (Original)</strong></li>
+                                            <li><strong>Father's Income Certificate (Original)</strong></li>
+                                            <li><strong>Photos (6 copies)</strong></li>
+                                            <li><strong>Transfer Certificate (Original)</strong></li>
+                                            <li><strong>Blood Group</strong></li>
+                                            <li><strong>Bank Passbook (2 copies)</strong></li>
+                                            <li><strong>OBC Certificate (if applicable)</strong></li>
+                                            <li><strong>Guardian's Aadhar/Voter ID (2 copies)</strong></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-custom" data-bs-dismiss="modal"
+                                        style="background:#460C4C;">Got it</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade qr-modal" id="qrModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background:#460C4C;color:white;">
+                                    <h5 class="modal-title"><i class="fas fa-qrcode me-2"></i>QR Code</h5>
+                                    <button type="button" class="btn-close btn-close-white"
+                                        data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqefYdvv3ZepXiL2kiRXievv_t-nTMnlH8U6S-zi4HyLIFOLExNmogNPJ0rhoNzmYOk40WWdYnC8e41iQVmP4vTwUBapNPe3YSFAAC7dRkPAH2xFoae6S9TToP0wP25HNnCtGDNtCqbau1CGBYy0ftUa7zD-DSfIEmQFL7IXVun6ShNMbC2vdSZq5Zjn3m/w380-h640/WhatsApp%20Image%202026-02-12%20at%2011.17.43%20AM.jpeg"
+                                        alt="QR"
+                                        style="max-width:100%;border:4px solid #460C4C;border-radius:20px;padding:8px;">
+                                    <p class="mt-3 fw-bold">Pay ₹250</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+                    <script>
+                        window.calculateResult = function () {
+                            const subjects = ['bengali', 'english', 'math', 'phy_science', 'life_science', 'geo', 'history'];
+                            let total = 0;
+                            subjects.forEach(sub => {
+                                const input = document.querySelector(`[name="${sub}"]`);
+                                if (input && input.value.trim() !== '' && !isNaN(parseFloat(input.value))) {
+                                    total += parseFloat(input.value) || 0;
+                                }
+                            });
+                            const maxMarks = subjects.length * 100;
+                            const percentage = maxMarks > 0 ? (total / maxMarks) * 100 : 0;
+                            document.getElementById('totalMarksInput').value = total.toFixed(2);
+                            document.getElementById('percentageInput').value = percentage.toFixed(2) + '%';
+
+                            const mathVal = parseFloat(document.querySelector('[name="math"]')?.value) || 0;
+                            const phyVal = parseFloat(document.querySelector('[name="phy_science"]')?.value) || 0;
+                            const lifeVal = parseFloat(document.querySelector('[name="life_science"]')?.value) || 0;
+                            const scienceTotal = mathVal + phyVal + lifeVal;
+                            const sciencePercentage = (scienceTotal / 300) * 100;
+                            const scienceTotalInput = document.querySelector('[name="science_total"]');
+                            const sciencePercentageInput = document.querySelector('[name="science_percentage"]');
+                            if (scienceTotalInput) scienceTotalInput.value = scienceTotal.toFixed(2);
+                            if (sciencePercentageInput) sciencePercentageInput.value = (isNaN(sciencePercentage) ? 0 : sciencePercentage).toFixed(2) + '%';
+                        };
+
+                        const MIN_KB = 10, MAX_KB = 200;
+                        function validateFileSize(inputElement) {
+                            const warningDivId = `warn_${inputElement.name}`;
+                            let warningDiv = document.getElementById(warningDivId);
+                            if (!warningDiv && inputElement.parentElement) {
+                                warningDiv = inputElement.parentElement.querySelector('.file-size-warning');
+                            }
+                            if (!warningDiv) {
+                                warningDiv = document.createElement('div');
+                                warningDiv.className = 'file-size-warning';
+                                warningDiv.id = warningDivId;
+                                inputElement.parentNode.appendChild(warningDiv);
+                            }
+                            inputElement.classList.remove('file-size-error');
+                            if (inputElement.files.length === 0) {
+                                if (inputElement.hasAttribute('required')) {
+                                    warningDiv.innerText = '';
+                                    return false;
+                                } else {
+                                    warningDiv.innerText = '';
+                                    return true;
+                                }
+                            }
+                            const file = inputElement.files[0];
+                            const fileSizeKB = file.size / 1024;
+                            if (fileSizeKB < MIN_KB) {
+                                inputElement.classList.add('file-size-error');
+                                warningDiv.innerText = `⚠️ File too small (${fileSizeKB.toFixed(2)}KB). Minimum ${MIN_KB}KB required.`;
+                                return false;
+                            } else if (fileSizeKB > MAX_KB) {
+                                inputElement.classList.add('file-size-error');
+                                warningDiv.innerText = `⚠️ File too large (${fileSizeKB.toFixed(2)}KB). Maximum ${MAX_KB}KB allowed.`;
+                                return false;
+                            } else {
+                                warningDiv.innerText = `✅ Size OK (${fileSizeKB.toFixed(2)}KB)`;
+                                warningDiv.style.color = '#28a745';
+                                return true;
+                            }
+                        }
+
+                        function validateRequiredFields() {
+                            const requiredInputs = document.querySelectorAll('[required]');
+                            let isValid = true;
+                            requiredInputs.forEach(input => {
+                                const errorDiv = document.querySelector(`.required-error[data-for="${input.name}"]`);
+                                if (!errorDiv) return;
+                                input.classList.remove('is-invalid');
+                                errorDiv.classList.remove('show');
+
+                                let value = '';
+                                if (input.type === 'file') {
+                                    value = input.files.length > 0 ? 'file' : '';
+                                } else if (input.tagName === 'SELECT') {
+                                    value = input.value;
+                                } else {
+                                    value = input.value.trim();
+                                }
+
+                                if (!value) {
+                                    input.classList.add('is-invalid');
+                                    errorDiv.classList.add('show');
+                                    isValid = false;
+                                }
+                            });
+                            return isValid;
+                        }
+
+                        function validateAllBeforeSubmit() {
+                            document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+                            document.querySelectorAll('.required-error.show').forEach(el => el.classList.remove('show'));
+
+                            const fileInputs = document.querySelectorAll('.file-size-limit');
+                            let allFilesValid = true;
+                            fileInputs.forEach(input => {
+                                if (!validateFileSize(input)) allFilesValid = false;
+                            });
+
+                            const allRequiredValid = validateRequiredFields();
+
+                            if (!allFilesValid || !allRequiredValid) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Validation Error',
+                                    text: 'Please fill all required fields and ensure all images are 10KB-200KB',
+                                    confirmButtonText: 'OK'
+                                });
+                                return false;
+                            }
+                            return true;
+                        }
+
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const fileInputs = document.querySelectorAll('.file-size-limit');
+                            fileInputs.forEach(input => {
+                                input.addEventListener('change', function () {
+                                    validateFileSize(this);
+                                });
+                            });
+
+                            const instructionModal = new bootstrap.Modal(document.getElementById('instructionModal'));
+                            const qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+
+                            setTimeout(() => { instructionModal.show(); }, 400);
+                            document.getElementById('helpButton').addEventListener('click', function () { instructionModal.show(); });
+
+                            const qrImg = document.querySelector('.clickable-qr');
+                            if (qrImg) qrImg.addEventListener('click', function () { qrModal.show(); });
+
+                            const form = document.getElementById('registrationForm');
+                            form.addEventListener('submit', function (e) {
+                                const isValid = validateAllBeforeSubmit();
+                                if (!isValid) {
+                                    e.preventDefault();
+                                }
+                            });
+
+                            calculateResult(); 
+                        });
+                    </script>
+</body>
+
+</html>

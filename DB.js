@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const mongourl = 'mongodb+srv://imtajdatabase_db_user:Skimtaj786@coolmate.fwtklfi.mongodb.net/'
-
+const mongourl = process.env.DB_URL
 //const mongourl = 'mongodb://localhost:27017/afm-project';
 
 mongoose.connect(mongourl);
