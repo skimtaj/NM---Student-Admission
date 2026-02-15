@@ -287,8 +287,8 @@ const downloadApplication = async (req, res) => {
     }
     catch (err) {
 
-        console.log('Admit pdf genering error', err); 
-      
+        console.log('Admit pdf genering error', err);
+
     }
 
 }
