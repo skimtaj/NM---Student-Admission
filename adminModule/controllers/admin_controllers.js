@@ -128,7 +128,7 @@ const downloadPDF = async (req, res) => {
 
         console.log(admissionSourse)
 
-        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/ilovepdf_merged (1) (7) (2) (1).pdf');
+        const inputPdfPath = path.join(__dirname, '../../admission_form_2026/NM_Application_form.pdf');
         const existingPdfBytes = await fs.readFile(inputPdfPath);
         const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
